@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignupComponent } from './signup/signup.component';
 import { PostJobComponent } from './post-job/post-job.component';
+import { ApplyForJobComponent } from './apply-for-job/apply-for-job.component';
 
 
 
@@ -15,6 +16,7 @@ import { PostJobComponent } from './post-job/post-job.component';
     LogInComponent,
     SignupComponent,
     PostJobComponent,
+    ApplyForJobComponent,
     
     
   ],
