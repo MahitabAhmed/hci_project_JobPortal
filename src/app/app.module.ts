@@ -4,13 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { SignupComponent } from './signup/signup.component';
+import { PostJobComponent } from './post-job/post-job.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent
+    LogInComponent,
+    SignupComponent,
+    PostJobComponent,
     
     
   ],
