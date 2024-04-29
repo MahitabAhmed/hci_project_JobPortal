@@ -7,6 +7,11 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SignupComponent } from './signup/signup.component';
 import { PostJobComponent } from './post-job/post-job.component';
 import { ApplyForJobComponent } from './apply-for-job/apply-for-job.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 
 
 
@@ -17,6 +22,7 @@ import { ApplyForJobComponent } from './apply-for-job/apply-for-job.component';
     SignupComponent,
     PostJobComponent,
     ApplyForJobComponent,
+    JobDetailsComponent,
     
     
   ],
@@ -24,8 +30,12 @@ import { ApplyForJobComponent } from './apply-for-job/apply-for-job.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatIconModule,
+    MatSlideToggleModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
