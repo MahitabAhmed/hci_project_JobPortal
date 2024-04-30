@@ -11,6 +11,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 
@@ -23,6 +24,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     PostJobComponent,
     ApplyForJobComponent,
     JobDetailsComponent,
+    UserProfileComponent,
     
     
   ],
