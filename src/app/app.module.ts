@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -33,7 +34,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AppRoutingModule,
     FormsModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [
     provideAnimationsAsync()
