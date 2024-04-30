@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <div class="container">
     <div class="login-container">
       <div class="circle">
@@ -9,13 +10,17 @@
         <input type="text" name="username" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
         <div class="forgot-password">
+          <nav>
             <a href="#">Forgot Password?</a>
+          </nav>
           </div>
         <button type="submit">Login</button>
         
       </form>
       <div>
-          Don't have an account? <a href="#"> Sign Up</a>
+        <nav>
+          Don't have an account? <a routerLink="com"> Sign Up</a>
+        </nav>
       </div>
     </div>
   </div>
