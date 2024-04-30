@@ -5,7 +5,8 @@ import { LogInComponent } from './log-in/log-in.component';
 import { ApplyForJobComponent } from './apply-for-job/apply-for-job.component';
 
 const routes: Routes = [
-  {path: 'sign-up', component:SignupComponent},
+  {path: '', component:LogInComponent},
+  {path: 'signup', component:SignupComponent},
   {path: 'login', component:LogInComponent},
   {path: 'com', component:ApplyForJobComponent}
 
