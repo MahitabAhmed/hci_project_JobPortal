@@ -64,3 +64,13 @@
 form {
   margin-bottom: 30px;
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+}
+button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
