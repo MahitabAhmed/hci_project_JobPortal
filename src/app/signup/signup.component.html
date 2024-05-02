@@ -1,22 +1,29 @@
 <div class="container">
-    <div class="login-container">
+  <div class="login-container">
       <div class="circle">
-
-        <img src="../../assets/images/login_user.jpg" alt="Profile Photo">
+          <img src="../../assets/images/login_user.jpg" alt="Profile Photo">
       </div>
       <h2>Sign Up</h2>
-      <form [formGroup] = "registearationForm" action="#" method="post">
-        <input formControlName = "email" type="text" name="email" placeholder="User Name" required>
-        <input formControlName = "userName" type="text" name="username" placeholder="Email" required>
-        <input formControlName = "password" type="password" name="password" placeholder="Password" required>
-        <button type="submit">Sign Up</button>
-        
+      <form [formGroup]="signUpForm" action="#" method="post">
+        <input [class.is-invalid]="" formControlName="userName" type="text" name="username" placeholder="User Name" required>
+        <input formControlName="email" type="email" name="email" placeholder="Email" required>
+          <input formControlName="password" type="password" name="password" placeholder="Password" required>
+          <input formControlName="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm Password" required>
+          <div *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.dirty">
+            Passwords do not match.
+          </div>
+          <select formControlName="userType">
+              <option value="" disabled selected>Select User Type</option>
+              <option value="organization">Organization</option>
+              <option value="individual">Individual</option>
+          </select>
+          <button type="submit">Sign Up</button>
       </form>
-      {{registearationForm.value | json}} 
+      {{registearationForm.value | json}}
       <div>
-        <nav>
-          Already have an account? <a routerLink="/login"> Log In</a>
-        </nav>
+          <nav>
+              Already have an account? <a routerLink="/login"> Log In</a>
+          </nav>
       </div>
-    </div>
   </div>
+</div>
