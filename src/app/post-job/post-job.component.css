@@ -56,3 +56,14 @@ textarea {
   button:hover {
     background-color: #ff9100;
   }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  button:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  

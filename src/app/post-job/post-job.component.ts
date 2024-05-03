@@ -11,13 +11,22 @@ import {AbstractControl, ValidationErrors, FormBuilder, Validators } from '@angu
 export class PostJobComponent {
   constructor(private formBuilder:FormBuilder,private router: Router){}
   postJobForm = this.formBuilder.group({
-    companyName: ['', [Validators.required,]],
-    jobTitle: ['', [Validators.required,]],
-    location:['',[Validators.required]],
-    applyingMethod:[''],
-    description:['', [Validators.required]],
-    qualifications:['', [Validators.required]]
+    companyName: ['', [Validators.required]],
+    jobTitle: ['', [Validators.required, Validators.maxLength(50)]],
+    location: ['', [Validators.required]],
+    applyingMethod: ['', [Validators.required]],
+    description: ['', [Validators.required, Validators.maxLength(500)]],
+    qualifications: ['', [Validators.required, Validators.maxLength(300)]]
 
     });
+
+      // Getter methods for easier access in the template
+  get companyName() { return this.postJobForm.get('companyName'); }
+  get jobTitle() { return this.postJobForm.get('jobTitle'); }
+  get location() { return this.postJobForm.get('location'); }
+  get applyingMethod() { return this.postJobForm.get('applyingMethod'); }
+  get description() { return this.postJobForm.get('description'); }
+  get qualifications() { return this.postJobForm.get('qualifications'); }
+
 
 }
