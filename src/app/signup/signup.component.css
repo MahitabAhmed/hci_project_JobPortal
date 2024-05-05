@@ -37,7 +37,7 @@
   text-align: center;
 }
 
-.login-container input, .login-container select {
+.login-container input:not([type="checkbox"]){
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -73,4 +73,13 @@ form {
 button:disabled {
   pointer-events: none;
   opacity: 0.5;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 8px; /* Add some space between checkbox and label */
 }
