@@ -6,19 +6,75 @@ import { job } from '../interfaces/job';
   providedIn: 'root'
 })
 export class PostService {
-  private jobs: job[] = []; // Initialize an empty array to store jobs
-  private jobsSubject = new BehaviorSubject<job[]>([]); // BehaviorSubject to emit changes
+  private jobs: job[] = [
+    {
+      id:1,
+      companyName:'UI company',
+      jobTitle:'UI designer',
+      location: '12 street nasr city',
+      salaryRange: '8000~9000',
+      minSalary:8000,
+      maxSalary:9000,
+      description: 'company that offer ui services',
+      isSaved: true
+    },
+    {
+      id: 2,
+      companyName:'Back end company',
+      jobTitle:'Back-End Developer',
+      location: '30 street 6 october',
+      salaryRange: '9000~10000',
+      minSalary:9000,
+      maxSalary:10000,
+      description: 'company that offer back end services',
+      isSaved: true
+    },
+    {
+      id: 3,
+      companyName:'Front end company',
+      jobTitle:'Front-End Developer',
+      location: '29 street el saida zinab',
+      salaryRange: '7000~8000',
+      minSalary:7000,
+      maxSalary:8000,
+      description: 'company that provide front end services',
+      isSaved: true
+    },
+    {
+      id: 4,
+      companyName:'Test_company',
+      jobTitle:'Test Engineering',
+      location: '15 street elabassia',
+      salaryRange: '5000~7000',
+      minSalary:5000,
+      maxSalary:7000,
+      description: 'company that offer test services',
+      isSaved: true
+    },
+    
+
+  ];
+  private jobsSubject = new BehaviorSubject<job[]>([]);
 
   constructor() { }
 
-  // Method to add a new job
+  
+
   addJob(newJob: job) {
     this.jobs.push(newJob);
-    this.jobsSubject.next(this.jobs); // Emit updated list of jobs
+    this.jobsSubject.next(this.jobs);
   }
 
-  // Method to get the list of jobs
+  updateJob(updatedJob: job) {
+    const index = this.jobs.findIndex(job => job.id === updatedJob.id);
+    if (index !== -1) {
+      this.jobs[index] = updatedJob;
+      this.jobsSubject.next([...this.jobs]); // Emitting a new array to trigger the observable
+    }
+  }
+  
+
   getJobs() {
-    return this.jobsSubject.asObservable(); // Return Observable to listen for changes
+    return this.jobs;
   }
 }

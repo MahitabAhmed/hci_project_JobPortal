@@ -4,7 +4,8 @@ import { JobService } from '../services/job.service';
 import {Router} from '@angular/router';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service'; // Import UserService
-
+import { MatDialog } from '@angular/material/dialog';
+import { PauseDialogComponent } from '../pause-dialog-component/pause-dialog-component.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,6 +13,7 @@ import { UserService } from '../services/user.service'; // Import UserService
 })
 
 export class HomeComponent {
+  jobToEdit:job | undefined;
   filteredJobs: any[] = [];
   searchTerm: string = '';
   savedjobs: job[] = [];
@@ -43,7 +45,23 @@ export class HomeComponent {
   isCompany: boolean = false; // Initialize isCompany flag
   username: string = '';
   isCompanyProperty: boolean = false;
+  openPauseDialog(job: job) {
+    const dialogRef = this.dialog.open(PauseDialogComponent, {
+      width: '250px',
+      data: { pausedate: job.pausedate }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        job.pausedate = result;
+      }
+    });
+  }
   ngOnInit() {
+
+    // const defaultJobs = [...this.jobs];
+
+    this.jobs = this.postService.getJobs();
     this.isCompany = this.userService.getIsCompany();
     this.username = this.userService.getUsername();
     for(const job of this.jobs){
@@ -51,9 +69,9 @@ export class HomeComponent {
         this.isCompanyProperty =true;
       }
     }
-    this.postService.getJobs().subscribe(jobs => {
-    this.addedjobs = jobs;
-  });
+  //   this.postService.getJobs().subscribe(jobs => {
+  //   this.addedjobs = jobs;
+  // });
   for (const addedjob of this.addedjobs) {
       this.jobs.push(addedjob);
   }
@@ -63,56 +81,15 @@ export class HomeComponent {
   constructor(private userService: UserService,
     private postService: PostService,
     private jobService: JobService, 
-    private router:Router) {}
+    private router:Router,private dialog: MatDialog) {}
   //Saved: boolean = true;
-  jobs: job[] = [
-    {
-      id:1,
-      companyName:'UI company',
-      jobTitle:'UI designer',
-      location: '12 street nasr city',
-      salaryRange: '8000~9000',
-      minSalary:8000,
-      maxSalary:9000,
-      description: 'company that offer ui services',
-      isSaved: true
-    },
-    {
-      id: 2,
-      companyName:'Back end company',
-      jobTitle:'Back-End Developer',
-      location: '30 street 6 october',
-      salaryRange: '9000~10000',
-      minSalary:9000,
-      maxSalary:10000,
-      description: 'company that offer back end services',
-      isSaved: true
-    },
-    {
-      id: 3,
-      companyName:'Front end company',
-      jobTitle:'Front-End Developer',
-      location: '29 street el saida zinab',
-      salaryRange: '7000~8000',
-      minSalary:7000,
-      maxSalary:8000,
-      description: 'company that provide front end services',
-      isSaved: true
-    },
-    {
-      id: 4,
-      companyName:'Test_company',
-      jobTitle:'Test Engineering',
-      location: '15 street elabassia',
-      salaryRange: '5000~7000',
-      minSalary:5000,
-      maxSalary:7000,
-      description: 'company that offer test services',
-      isSaved: true
-    },
-    
-
-  ];
+  jobs:job[] = [];
+  updateJob(updatedJob: job) {
+    const index = this.jobs.findIndex(job => job.id === updatedJob.id);
+    if (index !== -1) {
+      this.jobs[index] = updatedJob;
+    }
+  }
   initJobs() {
     for (const savedjob of this.savedjobs) {
       for (const job of this.jobs) {
@@ -156,7 +133,7 @@ export class HomeComponent {
       }
   }
   postJob( ){
-    this.router.navigate(['/post-jobs']);
+    this.router.navigate(['/post-jobs'], { state: { jobToEdit: undefined } });
   }
   toggleFilters(filterNumber: number) {
     switch (filterNumber) {
@@ -328,10 +305,11 @@ export class HomeComponent {
       // For example, you might need to update the saved jobs list if the deleted job was saved.
     }
   }
-  editJob(job: job) {
-    this.router.navigate(['/post-jobs'], { state: { jobToEdit: job } });
+  editJob(job?: job) {
+    this.router.navigate(['/post-jobs'], { state: { jobToEdit: job } }); // Pass job to edit
   }
-  
-  
-  
+  viewDetails(job: job) {
+    this.router.navigate(['/job-details']);
+    
+  }
 }
