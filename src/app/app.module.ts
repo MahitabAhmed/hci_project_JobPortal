@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +17,7 @@ import { firebaseConfig } from './firebase-config';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { SavedJobComponent } from './saved-job/saved-job.component';
+import { PauseDialogComponent } from './pause-dialog-component/pause-dialog-component.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { SavedJobComponent } from './saved-job/saved-job.component';
     UserProfileComponent,
     HomeComponent,
     SavedJobComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { job } from '../interfaces/job';
 import { JobService } from '../services/job.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-saved-job',
@@ -10,14 +11,15 @@ import { JobService } from '../services/job.service';
 export class SavedJobComponent implements OnInit {
   savedJobs: job[] = [];
 
-  constructor(private jobService: JobService) {}
+  constructor(private jobService: JobService,private router: Router) {}
 
   ngOnInit() {
     this.savedJobs = this.jobService.getSavedJobs(); // Retrieve saved jobs from service
   }
   
   viewDetails(job: job) {
-    // Implement logic to view job details (e.g., open modal or navigate to details page)
+    this.router.navigate(['/job-details']);
+    
   }
 
   unsaveJob(job: job) {
