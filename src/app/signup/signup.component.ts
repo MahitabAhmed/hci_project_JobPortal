@@ -1,6 +1,8 @@
+// signup.component.ts
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { passwordMatchValidator } from '../validators/password-match.validator';
+import { FormBuilder, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +10,11 @@ import { passwordMatchValidator } from '../validators/password-match.validator';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   signUpForm = this.formBuilder.group({
     userName: [
@@ -24,25 +30,20 @@ export class SignupComponent {
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]],
     isCompany: [false], // Default value set here
-  }, {
-    validator: passwordMatchValidator
   });
 
-  // Custom validation function to check against reserved keywords
-  validateReservedKeywords(control: AbstractControl): ValidationErrors | null {
-    const reservedKeywords = ['admin', 'root'];
-    const username = (control.value as string).toLowerCase();
+  register(): void {
+  const { userName, email, password } = this.signUpForm.value;
+  const isCompany = this.signUpForm.get('isCompany')?.value as boolean; // Ensure isCompany is boolean
 
-    if (reservedKeywords.includes(username)) {
-      return { reservedKeyword: true }; // return an error if username is a reserved keyword
-    }
+  // Set user details in the UserService
+  this.userService.setUsername(userName||'');
+  this.userService.setIsCompany(isCompany);
 
-    return null; // return null if validation passes
-  }
+  // Proceed with any other registration logic (e.g., API calls, validation)
 
+  // For example, navigate to login after registration
+  this.router.navigate(['/login']);
+}
 
-  register(email: string, password: string): void {
-    const userType = this.signUpForm.get('isCompany')?.value ? 'company' : 'individual';
-
-  }
 }
