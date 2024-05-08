@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire/compat';
 import { firebaseConfig } from './firebase-config';
 import { SignupComponent } from './signup/signup.component';
+import { HomeComponent } from './home/home.component';
+import { SavedJobComponent } from './saved-job/saved-job.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { SignupComponent } from './signup/signup.component';
     ApplyForJobComponent,
     JobDetailsComponent,
     UserProfileComponent,
+    HomeComponent,
+    SavedJobComponent,
   ],
   imports: [
     BrowserModule,
